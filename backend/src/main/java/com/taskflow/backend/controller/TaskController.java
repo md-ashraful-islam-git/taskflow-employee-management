@@ -50,5 +50,13 @@ public class TaskController {
     public List<Task> getTasksByStatus(@PathVariable TaskStatus status) {
         return taskService.getTasksByStatus(status);
     }
+
+    @PutMapping("/{id}")
+    public Task updateTask(
+            @PathVariable Long id,
+            @RequestBody Task task) {
+
+        return taskService.updateTask(id, task);
+    }
 }
 

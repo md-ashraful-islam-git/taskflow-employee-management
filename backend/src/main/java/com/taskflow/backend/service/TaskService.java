@@ -41,4 +41,22 @@ public class TaskService {
     public List<Task> getTasksByStatus(TaskStatus status) {
         return taskRepository.findByStatus(status);
     }
+
+    public Task updateTask(Long id, Task updatedTask) {
+
+        Task existingTask = taskRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Task not found"));
+
+        existingTask.setTitle(updatedTask.getTitle());
+        existingTask.setDescription(updatedTask.getDescription());
+        existingTask.setStatus(updatedTask.getStatus());
+        existingTask.setPriority(updatedTask.getPriority());
+        existingTask.setDueDate(updatedTask.getDueDate());
+
+        if (updatedTask.getAssignedTo() != null) {
+            existingTask.setAssignedTo(updatedTask.getAssignedTo());
+        }
+
+        return taskRepository.save(existingTask);
+    }
 }
