@@ -6,6 +6,7 @@ import com.taskflow.backend.entity.TaskStatus;
 import com.taskflow.backend.repository.TaskRepository;
 import org.springframework.stereotype.Service;
 
+
 import java.util.List;
 import java.util.Optional;
 
@@ -58,5 +59,9 @@ public class TaskService {
         }
 
         return taskRepository.save(existingTask);
+    }
+
+    public long getTaskCountByStatus(TaskStatus status) {
+        return taskRepository.findByStatus(status).size();
     }
 }
