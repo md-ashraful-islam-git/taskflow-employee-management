@@ -61,6 +61,16 @@ public class TaskService {
         return taskRepository.save(existingTask);
     }
 
+    public Task updateTaskStatus(Long taskId, TaskStatus status) {
+
+        Task task = taskRepository.findById(taskId)
+                .orElseThrow(() -> new RuntimeException("Task not found"));
+
+        task.setStatus(status);
+
+        return taskRepository.save(task);
+    }
+
     public long getTaskCountByStatus(TaskStatus status) {
         return taskRepository.findByStatus(status).size();
     }
